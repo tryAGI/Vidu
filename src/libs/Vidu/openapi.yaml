@@ -1,0 +1,612 @@
+openapi: 3.0.1
+info:
+  title: Vidu API
+  description: |
+    Vidu API by Shengshu Tech - AI-powered video generation platform.
+    Supports text-to-video, image-to-video, reference-to-video (multi-subject consistency),
+    start-end-to-video, template-based generation, lip sync, image generation, and video upscaling.
+  version: "2.0"
+servers:
+  - url: https://api.vidu.com/ent/v2
+paths:
+  /text2video:
+    post:
+      operationId: createTextToVideoTask
+      summary: Create Text-to-Video task
+      description: Generates a video from a text prompt.
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextToVideoRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /img2video:
+    post:
+      operationId: createImageToVideoTask
+      summary: Create Image-to-Video task
+      description: Generates a video from a single reference image.
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageToVideoRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /reference2video:
+    post:
+      operationId: createReferenceToVideoTask
+      summary: Create Reference-to-Video task
+      description: Generates a video using multiple reference images or videos for subject consistency.
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceToVideoRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /start-end2video:
+    post:
+      operationId: createStartEndToVideoTask
+      summary: Create Start-End-to-Video task
+      description: Generates a video that transitions between a start and end frame.
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartEndToVideoRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /template2video:
+    post:
+      operationId: createTemplateToVideoTask
+      summary: Create Template-to-Video task
+      description: Generates a video using a named template (e.g. hugging, dance) applied to input images.
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateToVideoRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /lip-sync:
+    post:
+      operationId: createLipSyncTask
+      summary: Create Lip Sync task
+      description: Synchronizes lip movements in a video with provided audio or generated speech.
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LipSyncRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /reference2image:
+    post:
+      operationId: createReferenceToImageTask
+      summary: Create Reference-to-Image task
+      description: Generates images from text prompts and optional reference images.
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceToImageRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /upscale-new:
+    post:
+      operationId: createUpscaleTask
+      summary: Create Upscale task
+      description: Upscales a video to a higher resolution (1080p, 2K, 4K, or 8K).
+      tags: [Generation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpscaleRequest'
+      responses:
+        '200':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTask'
+  /tasks/{id}/creations:
+    get:
+      operationId: getTaskCreations
+      summary: Get task creations
+      description: Retrieves the status and generated output URLs for a task.
+      tags: [Tasks]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Task ID returned from the initial creation request.
+      responses:
+        '200':
+          description: Task creations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCreations'
+  /tasks/{id}/cancel:
+    post:
+      operationId: cancelTask
+      summary: Cancel task
+      description: Cancels an in-progress task. Some task states cannot be cancelled.
+      tags: [Tasks]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Task ID to cancel.
+      responses:
+        '200':
+          description: Empty response on success
+          content:
+            application/json:
+              schema:
+                type: object
+security:
+  - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Model:
+      type: string
+      description: Vidu model name.
+      enum:
+        - viduq3-turbo
+        - viduq3-pro
+        - viduq3
+        - viduq3-mix
+        - viduq2-pro
+        - viduq2
+        - viduq1
+        - vidu2.0
+    AspectRatio:
+      type: string
+      description: Output aspect ratio.
+      enum:
+        - "16:9"
+        - "9:16"
+        - "1:1"
+        - "3:4"
+        - "4:3"
+    Resolution:
+      type: string
+      description: Output video resolution.
+      enum:
+        - 360p
+        - 540p
+        - 720p
+        - 1080p
+    MovementAmplitude:
+      type: string
+      description: Camera movement amplitude.
+      enum:
+        - auto
+        - small
+        - medium
+        - large
+    TaskState:
+      type: string
+      description: Task lifecycle state.
+      enum:
+        - created
+        - queueing
+        - processing
+        - success
+        - failed
+    TextToVideoRequest:
+      type: object
+      required: [model, prompt]
+      properties:
+        model:
+          $ref: '#/components/schemas/Model'
+        prompt:
+          type: string
+          description: Text description of the desired video. Max 5000 characters.
+          maxLength: 5000
+        duration:
+          type: integer
+          description: Duration in seconds. Model-dependent (typically 1-16).
+        aspect_ratio:
+          $ref: '#/components/schemas/AspectRatio'
+        resolution:
+          $ref: '#/components/schemas/Resolution'
+        seed:
+          type: integer
+          description: Random seed for reproducibility.
+        movement_amplitude:
+          $ref: '#/components/schemas/MovementAmplitude'
+        bgm:
+          type: boolean
+          description: Add auto-generated background music.
+        audio:
+          type: boolean
+          description: Enable audio-video synchronization (viduq3 models only).
+        off_peak:
+          type: boolean
+          description: Run in off-peak mode (lower cost, up to 48h completion).
+        callback_url:
+          type: string
+          description: Webhook URL for status updates.
+        payload:
+          type: string
+          description: Custom passthrough data (max 1,048,576 characters).
+    ImageToVideoRequest:
+      type: object
+      required: [model, images]
+      properties:
+        model:
+          $ref: '#/components/schemas/Model'
+        images:
+          type: array
+          description: Reference image as array of exactly one URL or base64 data URI.
+          items:
+            type: string
+          minItems: 1
+          maxItems: 1
+        prompt:
+          type: string
+          description: Text description to guide the motion. Max 5000 characters.
+          maxLength: 5000
+        duration:
+          type: integer
+          description: Duration in seconds. Model-dependent.
+        resolution:
+          $ref: '#/components/schemas/Resolution'
+        seed:
+          type: integer
+          description: Random seed for reproducibility.
+        movement_amplitude:
+          $ref: '#/components/schemas/MovementAmplitude'
+        bgm:
+          type: boolean
+          description: Add auto-generated background music.
+        audio:
+          type: boolean
+          description: Enable audio-video synchronization (viduq3 models only).
+        off_peak:
+          type: boolean
+          description: Run in off-peak mode.
+        callback_url:
+          type: string
+          description: Webhook URL for status updates.
+        payload:
+          type: string
+          description: Custom passthrough data.
+    ReferenceToVideoRequest:
+      type: object
+      required: [model, prompt]
+      properties:
+        model:
+          $ref: '#/components/schemas/Model'
+        prompt:
+          type: string
+          description: Text description of the desired video. Max 5000 characters.
+          maxLength: 5000
+        images:
+          type: array
+          description: 1-7 reference images (URL or base64 data URI). PNG/JPEG/JPG/WebP, min 128x128, aspect ratio between 1:4 and 4:1, 50MB total.
+          items:
+            type: string
+          minItems: 1
+          maxItems: 7
+        videos:
+          type: array
+          description: Reference videos (viduq2-pro only). Max 1 video (8s) or 2 videos (5s each). mp4/avi/mov.
+          items:
+            type: string
+          maxItems: 2
+        duration:
+          type: integer
+          description: Duration in seconds.
+        aspect_ratio:
+          $ref: '#/components/schemas/AspectRatio'
+        resolution:
+          $ref: '#/components/schemas/Resolution'
+        seed:
+          type: integer
+        movement_amplitude:
+          $ref: '#/components/schemas/MovementAmplitude'
+        bgm:
+          type: boolean
+        audio:
+          type: boolean
+        off_peak:
+          type: boolean
+        callback_url:
+          type: string
+        payload:
+          type: string
+    StartEndToVideoRequest:
+      type: object
+      required: [model, images]
+      properties:
+        model:
+          $ref: '#/components/schemas/Model'
+        images:
+          type: array
+          description: Array of exactly two images (start frame, end frame). PNG/JPEG/JPG/WebP, aspect ratio 0.8 to 1.25.
+          items:
+            type: string
+          minItems: 2
+          maxItems: 2
+        prompt:
+          type: string
+          maxLength: 5000
+        duration:
+          type: integer
+        resolution:
+          $ref: '#/components/schemas/Resolution'
+        seed:
+          type: integer
+        movement_amplitude:
+          $ref: '#/components/schemas/MovementAmplitude'
+        bgm:
+          type: boolean
+        audio:
+          type: boolean
+        off_peak:
+          type: boolean
+        callback_url:
+          type: string
+        payload:
+          type: string
+    TemplateToVideoRequest:
+      type: object
+      required: [template, images]
+      properties:
+        template:
+          type: string
+          description: Template name (e.g. hugging, dance). See Vidu templates list.
+        images:
+          type: array
+          description: Input images required by the template.
+          items:
+            type: string
+          minItems: 1
+          maxItems: 7
+        prompt:
+          type: string
+          description: Text description. Max 2000 characters.
+          maxLength: 2000
+        aspect_ratio:
+          type: string
+          enum:
+            - "16:9"
+            - "9:16"
+            - "1:1"
+        seed:
+          type: integer
+        bgm:
+          type: boolean
+        off_peak:
+          type: boolean
+        callback_url:
+          type: string
+        payload:
+          type: string
+    LipSyncRequest:
+      type: object
+      required: [video_url]
+      properties:
+        video_url:
+          type: string
+          description: Source video URL (mp4/mov/avi, H.264, 1-600s, less than 5GB).
+        audio_url:
+          type: string
+          description: Audio file URL to drive lip sync. Required if text is not provided.
+        text:
+          type: string
+          description: Text to synthesize into speech and lip-sync. Required if audio_url is not provided.
+        voice_id:
+          type: string
+          description: Voice identifier for text-to-speech mode.
+        speed:
+          type: number
+          description: Speech rate (0.5-1.5). Default 1.0.
+          minimum: 0.5
+          maximum: 1.5
+        ref_photo_url:
+          type: string
+          description: Face reference image URL when the video contains multiple faces.
+        callback_url:
+          type: string
+        payload:
+          type: string
+    ReferenceToImageRequest:
+      type: object
+      required: [prompt]
+      properties:
+        model:
+          type: string
+          description: Image generation model (viduq1 or viduq2).
+          enum:
+            - viduq1
+            - viduq2
+        prompt:
+          type: string
+          description: Text description. Max 2000 characters.
+          maxLength: 2000
+        images:
+          type: array
+          description: 0-7 reference images (viduq2) or 1-7 (viduq1).
+          items:
+            type: string
+          maxItems: 7
+        aspect_ratio:
+          type: string
+          enum:
+            - "16:9"
+            - "9:16"
+            - "1:1"
+            - "3:4"
+            - "4:3"
+        resolution:
+          type: string
+          enum:
+            - 1080p
+            - 2K
+            - 4K
+        seed:
+          type: integer
+        callback_url:
+          type: string
+        payload:
+          type: string
+    UpscaleRequest:
+      type: object
+      properties:
+        video_url:
+          type: string
+          description: Directly accessible video URL. Either this or video_creation_id is required.
+        video_creation_id:
+          type: string
+          description: Creation ID from a previous Vidu generation task. Takes priority over video_url.
+        resolution:
+          type: string
+          description: Target resolution. Must be higher than the source resolution.
+          enum:
+            - 1080p
+            - 2K
+            - 4K
+            - 8K
+        off_peak:
+          type: boolean
+        callback_url:
+          type: string
+        payload:
+          type: string
+    VideoTask:
+      type: object
+      description: Task object returned when a generation request is created.
+      properties:
+        task_id:
+          type: string
+          description: Unique task identifier.
+        state:
+          $ref: '#/components/schemas/TaskState'
+        model:
+          type: string
+        prompt:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        videos:
+          type: array
+          items:
+            type: string
+        duration:
+          type: integer
+        seed:
+          type: integer
+        aspect_ratio:
+          type: string
+        resolution:
+          type: string
+        bgm:
+          type: boolean
+        movement_amplitude:
+          type: string
+        credits:
+          type: integer
+          description: Credits consumed by the task.
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp (ISO 8601).
+        err_code:
+          type: string
+          description: Error code present on failure.
+    Creation:
+      type: object
+      description: A single generated output associated with a task.
+      properties:
+        id:
+          type: string
+          description: Creation identifier.
+        url:
+          type: string
+          description: Result URL (valid 24 hours).
+        cover_url:
+          type: string
+          description: Cover/poster image URL (valid 24 hours).
+    TaskCreations:
+      type: object
+      description: Status and generated outputs of a task.
+      properties:
+        state:
+          $ref: '#/components/schemas/TaskState'
+        err_code:
+          type: string
+          description: Error code present on failure.
+        credits:
+          type: integer
+        payload:
+          type: string
+        creations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Creation'
