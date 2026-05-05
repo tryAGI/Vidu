@@ -21,6 +21,19 @@ namespace Vidu
         /// Create Lip Sync task<br/>
         /// Synchronizes lip movements in a video with provided audio or generated speech.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Vidu.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Vidu.AutoSDKHttpResponse<global::Vidu.VideoTask>> CreateLipSyncTaskAsResponseAsync(
+
+            global::Vidu.LipSyncRequest request,
+            global::Vidu.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Create Lip Sync task<br/>
+        /// Synchronizes lip movements in a video with provided audio or generated speech.
+        /// </summary>
         /// <param name="videoUrl">
         /// Source video URL (mp4/mov/avi, H.264, 1-600s, less than 5GB).
         /// </param>

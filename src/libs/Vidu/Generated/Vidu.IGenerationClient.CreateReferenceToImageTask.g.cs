@@ -21,6 +21,19 @@ namespace Vidu
         /// Create Reference-to-Image task<br/>
         /// Generates images from text prompts and optional reference images.
         /// </summary>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::Vidu.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::Vidu.AutoSDKHttpResponse<global::Vidu.VideoTask>> CreateReferenceToImageTaskAsResponseAsync(
+
+            global::Vidu.ReferenceToImageRequest request,
+            global::Vidu.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Create Reference-to-Image task<br/>
+        /// Generates images from text prompts and optional reference images.
+        /// </summary>
         /// <param name="model">
         /// Image generation model (viduq1 or viduq2).
         /// </param>
