@@ -91,5 +91,6 @@ namespace Vidu
         public UpscaleRequest()
         {
         }
+
     }
 }

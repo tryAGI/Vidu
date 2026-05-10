@@ -176,5 +176,6 @@ namespace Vidu
         public VideoTask()
         {
         }
+
     }
 }
