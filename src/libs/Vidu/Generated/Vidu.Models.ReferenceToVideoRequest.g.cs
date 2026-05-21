@@ -178,5 +178,6 @@ namespace Vidu
         public ReferenceToVideoRequest()
         {
         }
+
     }
 }

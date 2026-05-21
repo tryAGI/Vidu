@@ -112,5 +112,6 @@ namespace Vidu
         public ReferenceToImageRequest()
         {
         }
+
     }
 }
