@@ -4,7 +4,7 @@
 namespace Vidu
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class UpscaleRequest
     {
@@ -28,19 +28,19 @@ namespace Vidu
         public global::Vidu.UpscaleRequestResolution? Resolution { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("off_peak")]
         public bool? OffPeak { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("callback_url")]
         public string? CallbackUrl { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("payload")]
         public string? Payload { get; set; }

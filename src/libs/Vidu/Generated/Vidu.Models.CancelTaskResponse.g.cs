@@ -4,7 +4,7 @@
 namespace Vidu
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class CancelTaskResponse
     {

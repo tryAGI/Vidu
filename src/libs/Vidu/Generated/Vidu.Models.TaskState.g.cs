@@ -9,23 +9,23 @@ namespace Vidu
     public enum TaskState
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Created,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Failed,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Processing,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Queueing,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Success,
     }
