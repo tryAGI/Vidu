@@ -9,11 +9,11 @@ namespace Vidu
     public enum ReferenceToImageRequestModel
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq1,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq2,
     }

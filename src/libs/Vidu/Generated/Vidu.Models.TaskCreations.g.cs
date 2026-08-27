@@ -22,19 +22,19 @@ namespace Vidu
         public string? ErrCode { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("credits")]
         public int? Credits { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("payload")]
         public string? Payload { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("creations")]
         public global::System.Collections.Generic.IList<global::Vidu.Creation>? Creations { get; set; }

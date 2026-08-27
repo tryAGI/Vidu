@@ -4,28 +4,28 @@
 namespace Vidu
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum ReferenceToImageRequestAspectRatio
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x16_9,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x1_1,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x3_4,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x4_3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         x9_16,
     }

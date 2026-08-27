@@ -20,7 +20,7 @@ namespace Vidu.JsonConverters
                     {
                         return global::Vidu.MovementAmplitudeExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

@@ -4,7 +4,7 @@
 namespace Vidu
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ReferenceToImageRequest
     {
@@ -29,33 +29,33 @@ namespace Vidu
         public global::System.Collections.Generic.IList<string>? Images { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("aspect_ratio")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Vidu.JsonConverters.ReferenceToImageRequestAspectRatioJsonConverter))]
         public global::Vidu.ReferenceToImageRequestAspectRatio? AspectRatio { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("resolution")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Vidu.JsonConverters.ReferenceToImageRequestResolutionJsonConverter))]
         public global::Vidu.ReferenceToImageRequestResolution? Resolution { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("seed")]
         public int? Seed { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("callback_url")]
         public string? CallbackUrl { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("payload")]
         public string? Payload { get; set; }

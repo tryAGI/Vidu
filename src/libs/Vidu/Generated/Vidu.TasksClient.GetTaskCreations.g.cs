@@ -134,7 +134,7 @@ namespace Vidu
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::Vidu.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

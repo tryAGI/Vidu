@@ -4,7 +4,7 @@
 namespace Vidu
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class LipSyncRequest
     {
@@ -46,13 +46,13 @@ namespace Vidu
         public string? RefPhotoUrl { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("callback_url")]
         public string? CallbackUrl { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("payload")]
         public string? Payload { get; set; }

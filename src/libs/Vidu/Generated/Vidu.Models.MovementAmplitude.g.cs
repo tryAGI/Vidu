@@ -9,19 +9,19 @@ namespace Vidu
     public enum MovementAmplitude
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Auto,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Large,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Medium,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Small,
     }

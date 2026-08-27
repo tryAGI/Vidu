@@ -9,35 +9,35 @@ namespace Vidu
     public enum Model
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Vidu20,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq1,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq2,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq2Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq3,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq3Mix,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq3Pro,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Viduq3Turbo,
     }

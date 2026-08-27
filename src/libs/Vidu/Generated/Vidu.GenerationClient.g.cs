@@ -10,7 +10,7 @@ namespace Vidu
     public sealed partial class GenerationClient : global::Vidu.IGenerationClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const string DefaultBaseUrl = "https://api.vidu.com/ent/v2";
 
@@ -37,7 +37,7 @@ namespace Vidu
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Vidu.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {
