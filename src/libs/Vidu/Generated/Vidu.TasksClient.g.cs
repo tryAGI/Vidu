@@ -34,7 +34,7 @@ namespace Vidu
         /// <inheritdoc/>
         public global::Vidu.AutoSDKClientOptions Options { get; }
 
-        internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Vidu.SourceGenerationContext.Default);
+        internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::Vidu.TasksSourceGenerationContext.Default);
 
         /// <summary>
         ///
