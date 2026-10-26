@@ -56,6 +56,7 @@ namespace Vidu
     #pragma warning restore CS3016
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Vidu.JsonSerializerContextTypes))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::System.Collections.Generic.List<object>), TypeInfoPropertyName = "SystemCollectionsGeneric_ObjectList")]
+    [global::System.Text.Json.Serialization.JsonSerializable(typeof(string[]))]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Vidu.Model), TypeInfoPropertyName = "Model2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Vidu.AspectRatio), TypeInfoPropertyName = "AspectRatio2")]
     [global::System.Text.Json.Serialization.JsonSerializable(typeof(global::Vidu.Resolution), TypeInfoPropertyName = "Resolution2")]
